@@ -1,0 +1,8 @@
+audios/
+*.o
+*.a
+adm
+vgcore*
+main.c
+.vscode
+a.out
