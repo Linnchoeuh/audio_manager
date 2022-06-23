@@ -6,7 +6,7 @@
 
 #include "adm_resample.h"
 
-bool adm_fast_resample(t_adm *adm,
+bool adm_fast_resample(t_adm_audio *adm,
 					   size_t new_sample_rate)
 {
 	void *tmp_addr;

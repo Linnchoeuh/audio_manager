@@ -4,7 +4,7 @@
  ** @brief
  **/
 
-#include "adm_baselib.h"
+#include "adm_libstd.h"
 
 char *adm_str_chain_fuse(ssize_t len, ...)
 {

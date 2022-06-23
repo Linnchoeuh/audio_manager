@@ -3,6 +3,5 @@ audios/
 *.a
 adm
 vgcore*
-main.c
 .vscode
 a.out

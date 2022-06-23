@@ -1,15 +1,10 @@
-/*
-** *****************************************************************************
-** lenny.vigeon <lenny.vigeon@student-station>
-** Ecole 89 - 14/02/2022 10:00:00
-**
-** adm_str_fuse.c - 2022
-**
-** Fuse two char* into one str1 then str2
-** *****************************************************************************
-*/
+/**
+ ** @file adm_str_fuse.c
+ ** @author Lenny Vigeon [lenny.vigeon@gmail.com]
+ ** @brief
+ **/
 
-#include "adm_baselib.h"
+#include "adm_libstd.h"
 
 char *adm_str_fuse(char *str1,
 					char *str2)

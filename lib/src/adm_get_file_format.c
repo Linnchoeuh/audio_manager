@@ -35,8 +35,5 @@ int adm_get_file_format(char *file_name)
 	close(fd);
 	if (bytes != FORMAT_ID_LEN)
 		return (F_UNKNOWN);
-	// printf("%c%c%c%c %d,%d,%d,%d\n",
-	// 			format[0], format[1], format[2], format[3],
-	// 			format[0], format[1], format[2], format[3]);
 	return (check_format(format));
 }

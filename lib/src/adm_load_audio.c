@@ -14,7 +14,7 @@ static void *adm_file_open_error(char *file_name)
 	return (NULL);
 }
 
-t_adm *adm_load_audio(char *file_name)
+t_adm_audio *adm_load_audio(char *file_name)
 {
 	int fd;
 	int format_id;
@@ -24,7 +24,8 @@ t_adm *adm_load_audio(char *file_name)
 	format_id = adm_get_file_format(file_name);
 	if (format_id == F_UNKNOWN)
 	{
-		write(STDOUT_FILENO, "Unsupported file format.\n", 25);
+		adm_puts(file_name);
+		write(STDOUT_FILENO, " : Unsupported file format.\n", 28);
 		return (NULL);
 	}
 	if (AUDIO_FORMAT_DECODER[format_id] == NULL)

@@ -4,69 +4,72 @@
  ** @brief
  **/
 
-#ifndef			__WAVE_H__
-#define			__WAVE_H__
+#ifndef __WAVE_H__
+#define __WAVE_H__
 
-#include	"audio_manager.h"
+#include "audio_manager.h"
 
-#include	<fcntl.h>
-#include    <unistd.h>
-#include    <stdbool.h>
-#include	<stdint.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <stdbool.h>
+#include <stdint.h>
 
 #define HEADER_SIZE 44
 
-#pragma			pack(2)
-typedef struct		s_wave_header
+typedef struct s_wave_header
 {
-  char file_type_bloc_id[4];
-  uint32_t		file_size;
-  char format_id[4];
-  char id[4];
-  uint32_t		bloc_size;
-  uint16_t    audio_format;
-  uint16_t    channels;
-  uint32_t		sample_rate;
-  uint32_t		byte_per_second;
-  uint16_t    byte_per_bloc;
-  uint16_t    bits_per_sample;
-  char			data_bloc_id[4];
-  uint32_t		data_size;
-}			t_wave_header;
-#pragma			pack()
+	char file_type_bloc_id[4];
+	uint32_t file_size;
+	char format_id[4];
+	char id[4];
+	uint32_t bloc_size;
+	uint16_t audio_format;
+	uint16_t channels;
+	uint32_t sample_rate;
+	uint32_t byte_per_second;
+	uint16_t byte_per_bloc;
+	uint16_t bits_per_sample;
+	char data_bloc_id[4];
+	uint32_t data_size;
+} t_wave_header;
 
-t_adm *wave_load_audio(char *file_name);
+typedef struct s_wave_data
+{
+	t_wave_header header; // The data of the wave header you opened
+	void *extra_data;
+	size_t extra_data_size; // The byte size of the extra data
+	void *audio;
+	size_t audio_size; // The byte size of the audio
+} t_wave_data;
 
-bool wave_get_header(int fd,
-					 t_wave_header *w_header);
+t_wave_data *new_wave_data(void);
 
-int8_t **wave_get_track(int fd,
-						t_wave_header w_header);
+void delete_wave_data(t_wave_data *wave_data);
 
+bool check_wave_header(t_wave_header *w_header);
 
-int8_t **wave_new_track(size_t byte_track_len,
-						uint16_t channels);
+t_adm_audio *load_wave_audio(char *file_name);
 
-void wave_print_header(t_wave_header *header);
+t_wave_data *read_wave_bin(int fd);
 
-// t_bunny_effect *load_wave_bunny_fx(char *file_name);
+bool read_wave_bin_header(int fd,
+						  t_wave_data *wave_data);
 
+bool read_wave_bin_extra_data(int fd,
+							  t_wave_data *wave_data);
 
+bool read_wave_bin_audio(int fd,
+						 t_wave_data *wave_data);
 
-// void *delete_wave_struct(t_wave *wave);
+int8_t **decode_wave_audio(t_wave_data *wave_data);
 
-// int8_t **new_track(size_t byte_track_len,
-// 				   uint16_t channels);
+/**
+ ** @brief Print in STDOUT a wave header.
+ **
+ ** @param header A filled data (t_wave_header).
+ **/
+void print_wave_header(t_wave_header *header);
 
-// bool wave_resample_16bit(t_wave *wave,
-// 				   		 size_t sample_rate);
-
-// typedef void	(*t_bit_resampler)(t_wave *wave,
-// 				  	   void *track,
-// 				  	   void *ntrack,
-// 						 double ratio);
-
+void print_wave_extra_data(t_wave_data *wave_data);
 
 #endif /*		__WAVE_H__		*/
-
-

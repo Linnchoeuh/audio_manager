@@ -4,10 +4,23 @@
  ** @brief
  **/
 
-#ifndef			__AUDIO_MANAGER_STRUCT_H__
-#define			__AUDIO_MANAGER_STRUCT_H__
+#ifndef	__AUDIO_MANAGER_STRUCT_H__
+#define	__AUDIO_MANAGER_STRUCT_H__
 
-#include	"audio_manager.h"
+#include "unistd.h"
+#include "stdint.h"
+
+#define FORMAT_ID_LEN 4
+#define NB_BIT_IN_BYTE 8
+
+typedef enum	e_audio_format
+{
+	F_UNKNOWN = -1,
+	F_RIFF_WAVE,
+	F_fLaC,
+	F_ID3,
+	F_NB_TOTAL
+}				t_audio_format;
 
 typedef struct	s_adm_duration
 {
@@ -26,13 +39,13 @@ typedef struct	s_audio_data
 	size_t track_size;
 }				t_audio_data;
 
-typedef struct	s_adm
+typedef struct	s_adm_audio
 {
 	t_audio_data data;
 	t_adm_duration duration;
 	int8_t **track;
-}				t_adm;
+}				t_adm_audio;
 
-typedef t_adm *(*audio_format_decoder)(char *file_name);
+typedef t_adm_audio *(*audio_format_decoder)(char *file_name);
 
 #endif

@@ -49,4 +49,15 @@ bool adm_str_append(char **target,
 
 char *adm_str_chain_fuse(ssize_t len, ...);
 
+int	adm_print_base(ssize_t	nbr,
+				   int	base);
+
+void *adm_memcpy(void *restrict destination,
+				 const void *restrict source,
+				 size_t size);
+
+void *adm_memset(void *ptr,
+				 int value,
+				 size_t count);
+
 #endif  /*      __ADM_BASELIB_H__    */

@@ -6,7 +6,7 @@
 
 #include "adm_resample.h"
 
-int8_t *adm_16bit_fast_resampler(t_adm *adm,
+int8_t *adm_16bit_fast_resampler(t_adm_audio *adm,
 								 void *track,
 								 size_t new_track_size,
 								 double sample_rate_ratio)
